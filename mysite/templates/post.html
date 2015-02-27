@@ -18,6 +18,7 @@
             <h1 class="title">
                 <a href="{% url 'post_detail' id=post.id %}">{{ post.title }}</a>
             </h1>
+            <div>travel date: {{ post.traveled_at|date:"Y / m / d" }}</div>
         </div>
         <div class="location">
             <i class="fa fa-map-marker"></i>
@@ -27,8 +28,30 @@
         <div class="post-content">
             {{ post.content }}
         </div>
+        <div>{{ post.author }}</div>
         <hr class="fancy-line">
         <img class="photo" src="{{ post.photo }}" alt="">
+
+        <div>
+            <h3>Leave a message... :)</h3>
+        </div>
+        <div>
+            {% for msg in msg_list %}
+            <div>
+                {{ msg.name }}   {{ msg.created_at }}
+            </div>
+            <div> {{ msg.message }} </div>
+            {% endfor %}
+        </div>
+
+        {% block content %}
+        <form action="{% url 'post_detail' id=post.id %}" method="post">{% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit">
+        </form>
+        {% endblock %}
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&sensor=false"></script>
     <script src="http://djangogirlstaipei.github.io/assets/js/map.js"></script>

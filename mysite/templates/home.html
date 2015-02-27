@@ -12,6 +12,14 @@
         <h1 class="site-title text-center">
             <a href="/">A Django Girl's Adventure</a>
         </h1>
+        {% if username %}
+            <div>hi, {{ username }}
+                <a href="{% url 'logout' %}">log out</a>
+            </div>
+
+        {% else %}
+            <a href="{% url 'login' %}">login</a>
+        {% endif %}
     </div>
     <div class="container">
         {% for post in post_list %}
@@ -22,6 +30,7 @@
                         <a href="{% url 'post_detail' id=post.id %}">{{ post.title }}</a>
                     </h2>
                     <div class="date">{{ post.created_at|date:"Y / m / d" }}</div>
+                    <div>travel date: {{ post.traveled_at|date:"Y / m / d" }}</div>
                 </div>
                 {% if post.photo %}
                 <div class="thumbnail">
