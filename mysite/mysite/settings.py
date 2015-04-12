@@ -84,30 +84,40 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_URL = '/static/'
+MEDIA_ROOT = BASE_DIR + '/media/'
 
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES = {
-    'default': dj_database_url.config()
-}
+MEDIA_URL = '/media/'
 
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# Allow all host headers
-ALLOWED_HOSTS = ['*']
-
-# Static asset configuration
 STATIC_ROOT = 'staticfiles'
 
-# Turn off DEBUG mode
-DEBUG = False
+STATIC_URL = '/static/'
 
-TEMPLATE_DEBUG = False
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 
-# Import all of local settings if the file exists
-try:
-    from .local_settings import *
-except ImportError:
-    pass
+# # Parse database configuration from $DATABASE_URL
+# import dj_database_url
+# DATABASES = {
+#     'default': dj_database_url.config()
+# }
+#
+# # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#
+# # Allow all host headers
+# ALLOWED_HOSTS = ['*']
+#
+# # Static asset configuration
+# STATIC_ROOT = 'staticfiles'
+#
+# # Turn off DEBUG mode
+# DEBUG = False
+#
+# TEMPLATE_DEBUG = False
+#
+# # Import all of local settings if the file exists
+# try:
+#     from .local_settings import *
+# except ImportError:
+#     pass

@@ -13,7 +13,7 @@
             <a href="/">A Django Girl's Adventure</a>
         </h1>
         {% if username %}
-            <div>hi, {{ username }}
+            <div>hi, <a href="{% url 'about' %}"> {{ username }} </a>
                 <a href="{% url 'logout' %}">log out</a>
             </div>
 

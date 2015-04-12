@@ -2,9 +2,10 @@ from datetime import datetime
 from django.contrib.admin.forms import AdminAuthenticationForm
 from django.shortcuts import render
 from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 import django.contrib.auth
-from trips.models import Post, Message
+from trips.models import Post, Message, Author
 from .forms import PostForm
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -44,6 +45,17 @@ def post_detail(request, id):
              'form': form,
              'msg_list': msg_list},
             context_instance=RequestContext(request))
+
+def author(request):
+    if "username" in request.session:
+        username = request.session['username']
+        user = User.objects.get(username=username)
+        author = Author.objects.get(author=user)
+        return render(request,
+                      'author.html',
+                     {'author': author})
+    else:
+        return HttpResponseForbidden()
 
 def sign_up(request):
     return render(request,

@@ -22,6 +22,15 @@ class Message(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey(Post)
 
+class Author(models.Model):
+    author = models.OneToOneField(User, primary_key=True)
+    photo = models.ImageField(upload_to="media")
+    about = models.TextField(blank=True)
+    nation = models.CharField(max_length=100, default='')
+    twitter_link = models.URLField(max_length=100, default='')
+    facebook_link = models.URLField(max_length=100, default='')
+    github_link = models.URLField(max_length=100, default='')
+
 class Auth():
 
     def create_user(self, first_name, last_name, email, pwd):
